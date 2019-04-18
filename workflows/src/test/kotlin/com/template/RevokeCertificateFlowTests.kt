@@ -1,6 +1,6 @@
 package com.template
 
-import com.template.flows.Responder
+import com.template.flows.RevokeCertificateResponder
 import net.corda.testing.node.MockNetwork
 import net.corda.testing.node.MockNetworkParameters
 import net.corda.testing.node.TestCordapp
@@ -8,7 +8,7 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 
-class FlowTests {
+class RevokeCertificateFlowTests {
     private val network = MockNetwork(MockNetworkParameters(cordappsForAllNodes = listOf(
         TestCordapp.findCordapp("com.template.contracts"),
         TestCordapp.findCordapp("com.template.flows")
@@ -18,7 +18,7 @@ class FlowTests {
 
     init {
         listOf(a, b).forEach {
-            it.registerInitiatedFlow(Responder::class.java)
+            it.registerInitiatedFlow(RevokeCertificateResponder::class.java)
         }
     }
 

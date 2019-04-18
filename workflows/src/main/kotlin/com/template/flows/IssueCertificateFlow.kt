@@ -9,7 +9,7 @@ import net.corda.core.utilities.ProgressTracker
 // *********
 @InitiatingFlow
 @StartableByRPC
-class Initiator : FlowLogic<Unit>() {
+class IssueCertificateInitiator : FlowLogic<Unit>() {
     override val progressTracker = ProgressTracker()
 
     @Suspendable
@@ -18,8 +18,8 @@ class Initiator : FlowLogic<Unit>() {
     }
 }
 
-@InitiatedBy(Initiator::class)
-class Responder(val counterpartySession: FlowSession) : FlowLogic<Unit>() {
+@InitiatedBy(IssueCertificateInitiator::class)
+class IssueCertificateResponder(val counterpartySession: FlowSession) : FlowLogic<Unit>() {
     @Suspendable
     override fun call() {
         // Responder flow logic goes here.
