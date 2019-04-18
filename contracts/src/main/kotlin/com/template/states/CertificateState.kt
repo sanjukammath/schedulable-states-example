@@ -5,6 +5,7 @@ import net.corda.core.contracts.*
 import net.corda.core.flows.FlowLogicRefFactory
 import net.corda.core.identity.AbstractParty
 import net.corda.core.identity.Party
+import java.time.Instant
 
 // *********
 // * State *
@@ -12,7 +13,7 @@ import net.corda.core.identity.Party
 @BelongsToContract(CertificateContract::class)
 data class CertificateState(val issuer: Party,
                             val owner: Party,
-                            val validity: Party) : ContractState, SchedulableState{
+                            val validity: Instant) : ContractState, SchedulableState{
 
     override val participants: List<AbstractParty> = listOf(issuer, owner)
 
