@@ -13,11 +13,12 @@ import java.time.Instant
 @BelongsToContract(CertificateContract::class)
 data class CertificateState(val issuer: Party,
                             val owner: Party,
-                            val validity: Instant) : ContractState, SchedulableState{
+                            val validity: Instant?) : ContractState, SchedulableState{
 
     override val participants: List<AbstractParty> = listOf(issuer, owner)
 
-    override fun nextScheduledActivity(thisStateRef: StateRef, flowLogicRefFactory: FlowLogicRefFactory): ScheduledActivity? {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun nextScheduledActivity(thisStateRef: StateRef, flowLogicRefFactory: FlowLogicRefFactory): ScheduledActivity? =
+            if (validity == null) {
+                null
+            } else ScheduledActivity(flowLogicRefFactory.create("com.template.workflows.ExpireCertificateFlow", thisStateRef), validity)
 }
