@@ -20,5 +20,5 @@ data class CertificateState(val issuer: Party,
     override fun nextScheduledActivity(thisStateRef: StateRef, flowLogicRefFactory: FlowLogicRefFactory): ScheduledActivity? =
             if (validity == null) {
                 null
-            } else ScheduledActivity(flowLogicRefFactory.create("com.template.workflows.ExpireCertificateFlow", thisStateRef), validity)
+            } else ScheduledActivity(flowLogicRefFactory.create("com.template.flows.ExpireCertificateInitiator", thisStateRef), validity)
 }
