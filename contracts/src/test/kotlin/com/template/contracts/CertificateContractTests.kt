@@ -13,7 +13,7 @@ import java.time.Instant
 class CertificateContractTests {
     private val alice = TestIdentity(CordaX500Name("Alice", "", "GB"))
     private val bob = TestIdentity(CordaX500Name("Bob", "", "GB"))
-    private val ledgerServices = MockServices(TestIdentity(CordaX500Name("TestId", "", "GB")))
+    private val ledgerServices = MockServices(listOf("com.template.contracts.CertificateContract", "com.template.workflows.IssueCertificateFlow"))
     private val certificateState = CertificateState(alice.party, bob.party, Instant.parse("2018-04-18T10:14:35.00Z"))
 
     @Test
