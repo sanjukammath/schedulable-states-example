@@ -80,3 +80,5 @@ lib
 # vagrant related
 Vagrantfile
 .vagrant/
+
+jdk*
