@@ -2,6 +2,7 @@ package com.template.contracts
 
 import net.corda.core.contracts.CommandData
 import net.corda.core.contracts.Contract
+import net.corda.core.contracts.requireThat
 import net.corda.core.transactions.LedgerTransaction
 
 // ************
@@ -10,7 +11,7 @@ import net.corda.core.transactions.LedgerTransaction
 class CertificateContract : Contract {
     companion object {
         // Used to identify our contract when building a transaction.
-        const val ID = "com.template.contracts.CertificateContract"
+        val ID = CertificateContract::class.qualifiedName!!
     }
 
     // Used to indicate the transaction's intent.
@@ -24,6 +25,9 @@ class CertificateContract : Contract {
     // does not throw an exception.
     override fun verify(tx: LedgerTransaction) {
         // Verification logic goes here.
+        requireThat {
+            "No inputs should be consumed when issuing an obligation." using (tx.inputStates.isEmpty())
+        }
     }
 
 
